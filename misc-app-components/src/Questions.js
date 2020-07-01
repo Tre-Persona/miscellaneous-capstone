@@ -1,40 +1,62 @@
-import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { CustomInput, Form, FormGroup, Label } from 'reactstrap';
+import React, { Component } from "react";
 
-const Questions = (props) => {
-  return (
-    <Form>
-      <FormGroup>
-        <Label for="exampleCheckbox">Are there clearly posted signs?</Label>
-        <div>
-          <CustomInput type="radio" id="exampleCustomRadio" name="customRadio" label="Yes" />
-          <CustomInput type="radio" id="exampleCustomRadio2" name="customRadio" label="No" />
+class Questions extends Component {
+  constructor() {
+    super();
+    this.state = {
+      name: "React"
+    };
+    this.onValueChange = this.onValueChange.bind(this);
+    this.formSubmit = this.formSubmit.bind(this);
+  }
+
+  onValueChange(event) {
+    this.setState({
+      selectedOption: event.target.value
+    });
+  }
+
+  formSubmit(event) {
+    event.preventDefault();
+    console.log(this.state.selectedOption)
+  }
+
+  render() {
+    return (
+      <>
+      <form onSubmit={this.formSubmit}>
+      <h3>Is there a visible trailhead?</h3>
+        <div className="radio">
+          <label>
+            <input
+              type="radio"
+              value="Yes"
+              checked={this.state.selectedOption === "Yes"}
+              onChange={this.onValueChange}
+            />
+            Yes
+          </label>
         </div>
-      </FormGroup>
-      <FormGroup>
-        <Label for="exampleCheckbox">Do the signs have Braille</Label>
-        <div>
-          <CustomInput type="radio" id="exampleCustomRadio" name="customRadio" label="Yes" />
-          <CustomInput type="radio" id="exampleCustomRadio2" name="customRadio" label="No" />
+        <div className="radio">
+          <label>
+            <input
+              type="radio"
+              value="No"
+              checked={this.state.selectedOption === "No"}
+              onChange={this.onValueChange}
+            />
+            No
+          </label>
         </div>
-      </FormGroup>
-      <FormGroup>
-        <Label for="exampleCheckbox">Is the trail 5ft wide, minimum?</Label>
         <div>
-          <CustomInput type="radio" id="exampleCustomRadio" name="customRadio" label="Yes" />
-          <CustomInput type="radio" id="exampleCustomRadio2" name="customRadio" label="No" />
+          Selected option is : {this.state.selectedOption}
         </div>
-      </FormGroup>
-      <FormGroup>
-        <Label for="exampleCheckbox">Is the surface hard packed? (i.e. less than one inch of loos sand)</Label>
-        <div>
-          <CustomInput type="radio" id="exampleCustomRadio" name="customRadio" label="Yes" />
-          <CustomInput type="radio" id="exampleCustomRadio2" name="customRadio" label="No" />
-        </div>
-      </FormGroup>
-    </Form>
-  );
+        <button className="btn btn-default" type="submit">
+          Submit
+        </button>
+      </form>
+      </>
+    );
+  }
 }
-
 export default Questions;

@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { useState } from "react";
 import Questions from './Questions'
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <Questions />
-    </div>
-  );
+    <>
+    <Questions />
+    </>
+  )
 }
-
 export default App;
